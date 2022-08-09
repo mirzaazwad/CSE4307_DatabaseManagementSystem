@@ -101,7 +101,7 @@ int FindMax(){
 int main(void){
     firstFileRead();
     int maxIx=FindMax();
-    printf(" Student ID Max GPA: %ld\n",nameList2[maxIx].studentID);
+    printf(" Max GPA Student ID: %ld\n",nameList2[maxIx].studentID);
 
     return 0;
 }
