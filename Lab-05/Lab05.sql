@@ -1,7 +1,7 @@
 create or replace view Advisor_Selection AS select ID,name,dept_name from instructor;
 
 
-create or replace view Student_Count as select name,count(*)StudentCount from (select Advisor_Selection.*,s_ID from Advisor_Selection join advisor on ID=i_ID) group by name;
+create or replace view Student_Count as select name,count(*)StudentCount from (select Advisor_Selection.*,s_ID from Advisor_Selection join advisor on ID=i_ID) group by name,ID;
 
 create role students;
 create role teachers;
