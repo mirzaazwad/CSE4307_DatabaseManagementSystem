@@ -5,7 +5,7 @@
 --- 3: grades
 --Lets create another 2 necessary relations
 create table employees
-(eid number primary key,
+(eid number primary key, 
 name varchar2(20),
 designation number(1,0), -- 1:Lecturer, 2: Asst. Professor, 3: Assoc. Prof. 4:Professor
 RoomNo varchar2(10),
