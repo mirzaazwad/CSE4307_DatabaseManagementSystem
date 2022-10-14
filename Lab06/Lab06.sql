@@ -1,3 +1,17 @@
+drop table BRANCH;
+drop table EMPLOYEES; 
+drop table ADMIN;
+drop table LIBRARIAN;
+drop table MANTAINANCE;
+drop table Shift;
+drop table junction_BOOKS_BRANCH;
+drop table BOOKS;
+drop table junction_Employees_Shift;
+drop table PUBLISHER;
+drop table ACCOUNT;
+drop table ISSUED;
+
+
 create table BRANCH(
     branch_id varchar2(20) NOT NULL,
     location varchar2(50) NOT NULL,
@@ -9,10 +23,10 @@ create table EMPLOYEES(
     NID int not null,
     Name varchar2(100) not null,
     dateOfBirth date not null,
-    bloodGroup varchar3(3) not null,
+    bloodGroup varchar2(3) not null,
+    branch_id varchar2(20) NOT NULL,
     constraint pk_employee primary key(NID),
-    constraint fk_employee foreign key (branch_id) references BRANCH
-
+    constraint fk_employee foreign key(branch_id) references BRANCH
 );
 
 create table ADMIN(
@@ -52,9 +66,16 @@ create table junction_Employees_Shift(
     constraint fk_junctionEmployees2 foreign key(Time,DayOfWeek) references EMPLOYEES
 );
 
+create table PUBLISHER(
+    name varchar2(20) not null,
+    city varchar2(20) not null,
+    EstablishmentYear int not null,
+    constraint pk_publisher primary key(name,city)
+);
+
 
 create table BOOKS(
-    ISBN int NOT NULL,
+    ISBN varchar2(50) NOT NULL,
     name varchar2(100) not null,
     author varchar2(100) not null,
     genre varchar2(50) not null,
@@ -73,14 +94,9 @@ create table junction_BOOKS_BRANCH(
     constraint copyCheck check(numberOfCopies>=0)
 );
 
-create table PUBLISHER(
-    name varchar2(20) not null,
-    city varchar2(20) not null,
-    EstablishmentYear int not null,
-    constraint pk_publisher primary key(name,city)
-);
 
-create ACCOUNT(
+
+create table ACCOUNT(
     Username varchar2(50) not null,
     name varchar2(100) not null,
     dateOfBirth date not null,
@@ -89,11 +105,10 @@ create ACCOUNT(
     constraint pk_account primary key(Username)
 );
 
-create ISSUED(
+create table ISSUED(
     Username varchar2(50) not null,
     ISBN varchar2(50) not null,
     Employee_ID int not null,
-    Username varchar2(50) not null,
     issueDate date not null,
     numberOfDays int default 15,
     constraint pk_issued primary key(Username,ISBN),
