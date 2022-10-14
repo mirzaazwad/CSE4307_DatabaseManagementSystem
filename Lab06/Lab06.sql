@@ -59,12 +59,18 @@ create table BOOKS(
     author varchar2(100) not null,
     genre varchar2(50) not null,
     price number not null,
-    numberOfCopies int not null,
     publisher_name varchar2(20) not null,
     publisher_city varchar2(20) not null,
     constraint pk_books primary key(ISBN),
-    constraint copyCheck check(numberOfCopies>=0),
     constraint fk_publisher foreign key(publisher_name,publisher_city) references Publisher
+);
+
+create table junction_BOOKS_BRANCH(
+    ISBN int not null,
+    branch_id varchar2(20) NOT NULL,
+    numberOfCopies int not null,
+    constraint pk_junction_BOOKS_BRANCH primary key(ISBN,branch_id),
+    constraint copyCheck check(numberOfCopies>=0)
 );
 
 create table PUBLISHER(
@@ -89,10 +95,10 @@ create ISSUED(
     Employee_ID int not null,
     Username varchar2(50) not null,
     issueDate date not null,
-    numberOfDays int null,
+    numberOfDays int default 15,
     constraint pk_issued primary key(Username,ISBN),
     constraint fk_issued foreign key(Username) references ACCOUNT,
     constraint fk_issued_books foreign key(ISBN) references BOOKS,
     constraint fk_issued_employee foreign key(Employee_ID) references EMPLOYEES,
-    constraint dayConstraint check(numberOfDays>0) 
+    constraint dayConstraint check(numberOfDays>=0) 
 );
