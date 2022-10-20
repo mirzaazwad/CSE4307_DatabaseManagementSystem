@@ -28,7 +28,7 @@ create user sys_teacher identified by 123;
 create user sys_administrator identified by 123;
 create user sys_head identified by 123;
 
-grant students,create session,connect to sys_student;
-grant teachers,create session,connect to sys_teacher;
-grant administrator,create session,connect to sys_administrator;
-grant head,create session,connect to sys_head;
+grant students,create session sys_student;
+grant teachers,create session sys_teacher;
+grant administrator,create session sys_administrator;
+grant head,create session sys_head;
