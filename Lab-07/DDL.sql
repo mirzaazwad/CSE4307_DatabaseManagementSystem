@@ -55,6 +55,17 @@ CREATE TABLE ACCIDENT(
   constraint PK_ACCIDENT PRIMARY KEY(dateOfAccident, timeOfAccident, DistrictName,DistrictSize)
 );
 
+CREATE TABLE ACCIDENT_CITIZEN(
+  dateOfAccident date,
+  timeOfAccident timestamp,
+  DistrictName varchar2(20),
+  DistrictSize number,
+  NID varchar2(12),
+  constraint PK_ACCIDENT_CITIZEN PRIMARY KEY(dateOfAccident, timeOfAccident,DistrictName,DistrictSize,NID),
+  constraint FK_ACCIDENT_CITIZEN_CITIZEN FOREIGN KEY(NID) REFERENCES CITIZEN(NID),
+  constraint FK_ACCIDENT_CITIZEN_ACCIDENT FOREIGN KEY(dateOfAccident, timeOfAccident,DistrictName,DistrictSize) REFERENCES ACCIDENT(dateOfAccident, timeOfAccident,DistrictName,DistrictSize)
+);
+
 CREATE TABLE ACCIDENT_LICENSE(
   dateOfAccident date,
   timeOfAccident timestamp,
