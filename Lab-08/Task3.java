@@ -24,8 +24,8 @@ public class Task3
             int count=0;
             while(rs.next())
             {
-                String type=rs.getString("Dat");
-                if(type.equals("2020")){
+                String year=rs.getString("Dat");
+                if(year.equals("2020")){
                     count++;
                 }
             }

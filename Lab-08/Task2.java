@@ -24,8 +24,6 @@ public class Task2
             int count=0;
             while(rs.next())
             {
-                int account=rs.getInt("a_id");
-                int amount=rs.getInt("amount");
                 String type=rs.getString("type");
                 if(type.equals("1")){
                     count++;
