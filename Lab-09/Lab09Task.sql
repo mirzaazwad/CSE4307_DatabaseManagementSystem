@@ -1,0 +1,13 @@
+CREATE OR REPLACE
+PROCEDURE NRichestBranches(N IN NUMBER, branches OUT branch%ROWTYPE)
+AS
+BEGIN
+    SELECT * INTO branches FROM branch ORDER BY assets DESC;
+END;
+/
+DECLARE
+ BRANCHES branch%ROWTYPE;
+BEGIN
+    NRichestBranches(3,BRANCHES);
+END;
+/
