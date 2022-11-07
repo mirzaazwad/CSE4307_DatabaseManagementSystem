@@ -14,6 +14,7 @@ BEGIN
     DBMS_OUTPUT . PUT_LINE('Sum is: ' || (NUM1+NUM2));
     DBMS_OUTPUT . PUT_LINE ('Time Right Now: ' || TO_CHAR(D,'HH24: MI: SS'));
     NUM3:='&num3';
+    --WITHOUT CASE
     IF(MOD(NUM3,2)=0) THEN
         DBMS_OUTPUT . PUT_LINE('Even Number');
     ELSE

@@ -1,9 +1,10 @@
+SET SERVEROUTPUT ON SIZE 1000000
 CREATE OR REPLACE
 PROCEDURE NRichestBranches(N IN NUMBER)
 AS
     MAX_ROW number;
 BEGIN
-    SELECT max(ROWNUM) INTO MAX_ROW FROM (SELECT * FROM branch ORDER BY assets DESC);
+    SELECT count(*) INTO MAX_ROW FROM branch;
     IF(N>MAX_ROW) THEN
         DBMS_OUTPUT.PUT_LINE('N Exceeds the number of records');
         RETURN;

@@ -1,3 +1,4 @@
+SET SERVEROUTPUT ON SIZE 1000000
 CREATE OR REPLACE
 FUNCTION CustomerCategory(CustomerName customer.customer_name%TYPE)
 RETURN varchar2
