@@ -24,3 +24,17 @@
 * Transaction Control
 * Calling functions and procedures
 * Handling large objects - BLOBs, CLOBs.
+
+## Why does a database programmer need access to a general-purpose programming language?
+
+* Not all queries can be expressed in SQL, since SQL does not provide the full  expressive power of a general-purpose programming language.
+* Non-declarative actions such as printing a report, interacting with a user, or sending the results of a query to a GUI cannot be done from within the SQL.
+
+## There are two approaches to access SQL from a General-Purpose Programming Language?
+
+* A general-purpose program can connect to and communicate with a database server using a collection of functions
+* Embedded SQL provides a means by which a program can interact with a database server.
+ * SQL statement can be translated at compile time into function calls
+ * At runtime, these function calls connect to the database using an API that provides dynamic SQL facilities
+
+
