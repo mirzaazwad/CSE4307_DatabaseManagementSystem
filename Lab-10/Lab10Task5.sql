@@ -1,0 +1,14 @@
+CREATE OR REPLACE TRIGGER ADVISOR_ASSIGN
+BEFORE INSERT
+   ON ADVISOR
+   FOR EACH ROW
+BEGIN
+   SELECT instructor.NEXTVAL INTO :NEW.i_ID FROM DUAL ;
+END;
+/
+
+
+begin
+  insert into advisor values('1');
+end;
+
