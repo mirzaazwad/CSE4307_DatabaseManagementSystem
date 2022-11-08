@@ -103,3 +103,20 @@ rset.getFloat(2));
 }
 
 ```
+#### Getting Result Fields
+
+```java
+rs.getString(“dept_name”); //and 
+rs.getString(1); //equivalent if dept_name is the first argument of select result
+```
+
+#### Dealing with NULL Values
+
+```java
+int a = rs.getInt(“a”);
+if (rs.wasNull())
+{
+ Systems.out.println(“Got null value”);
+}
+```
+## SQL Injection and its Prevention using Prepared Statements
