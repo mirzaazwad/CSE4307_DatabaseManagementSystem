@@ -120,3 +120,20 @@ if (rs.wasNull())
 }
 ```
 ## SQL Injection and its Prevention using Prepared Statements
+
+![SQL Injection Meme](https://github.com/mirzaazwad/CSE4307_DatabaseManagementSystem/blob/main/Lab-08%20JDBC%20Tutorial/SQLInjectionMeme.jpg)
+
+In computing, SQL injection is a code injection technique used to attack data-driven applications, in which malicious SQL statements are inserted into an entry field for execution (e.g. to dump the database contents to the attacker). SQL injection must exploit a security vulnerability in an application's software, for example, when user input is either incorrectly filtered for string literal escape characters embedded in SQL statements or user input is not strongly typed and unexpectedly executed. SQL injection is mostly known as an attack vector for websites but can be used to attack any type of SQL database.
+
+A step by step introduction:
+
+* Suppose a query is constructed of the form:
+```java
+"select * from instructor where name = '" + name + "'"
+```
+* Suppose the user enters:
+```sql
+X' or 'Y' = 'Y
+```
+* Then the resulting statement becomes:
+ 
