@@ -43,7 +43,7 @@
  public static void JDBCexample(String dbid, String userid, String passwd) 
 { 
  try (Connection conn = DriverManager.getConnection( 
-  "jdbc:oracle:thin:@db.yale.edu:2000:univdb", userid, passwd); 
+  "jdbc:oracle:thin:@localhost:1521:xe", userid, passwd); 
   Statement stmt = conn.createStatement();
  ) 
  { 
@@ -65,7 +65,7 @@ public static void JDBCexample(String dbid, String userid, String passwd)
  try { 
   Class.forName ("oracle.jdbc.driver.OracleDriver"); 
   Connection conn = DriverManager.getConnection( 
-  "jdbc:oracle:thin:@db.yale.edu:2000:univdb", userid, passwd); 
+  "jdbc:oracle:thin:@localhost:1521:xe", userid, passwd); 
   Statement stmt = conn.createStatement(); 
   … Do Actual Work ….
   stmt.close();
@@ -119,6 +119,7 @@ if (rs.wasNull())
  Systems.out.println(“Got null value”);
 }
 ```
+
 ## SQL Injection and its Prevention using Prepared Statements
 
 ![SQL Injection Meme](https://github.com/mirzaazwad/CSE4307_DatabaseManagementSystem/blob/main/Lab-08%20JDBC%20Tutorial/SQLInjectionMeme.jpg)
@@ -173,6 +174,58 @@ Prepared stament internally uses:
 select * from instructor where name = 'X\' or \'Y\' = \'Y'
 ```
 Which is essentially a sort of filtration or sanitisation
+
+
+## Metadata
+
+Metadata is essentially a set of data that describes and gives information about other data. 
+
+#### ResultSet metadata
+In Java, we use ResultSetMetaData which is ResultSet for metadata.
+For instance, we execute a query to get the ResultSet rs, then to get metadata:
+
+```java
+ResultSetMetaData rsmd = rs.getMetaData();
+for(int i = 1; i <= rsmd.getColumnCount(); i++) {
+ System.out.println(rsmd.getColumnName(i));
+ System.out.println(rsmd.getColumnTypeName(i));
+}
+```
+
+#### Database metadata
+
+```java
+DatabaseMetaData dbmd = conn.getMetaData();
+// Arguments to getColumns: Catalog, Schema-pattern, Table-pattern,
+// and Column-Pattern
+// Returns: One row for each column; row has a number of attributes
+// such as COLUMN_NAME, TYPE_NAME
+// The value null indicates all Catalogs/Schemas. 
+// The value “” indicates current catalog/schema
+// The value “%” has the same meaning as SQL like clause
+ResultSet rs = dbmd.getColumns(null, "univdb", "department", "%");
+while( rs.next()) {
+ System.out.println(rs.getString("COLUMN_NAME"),
+ rs.getString("TYPE_NAME");
+}
+```
+and
+```java
+DatabaseMetaData dbmd = conn.getMetaData();
+// Arguments to getTables: Catalog, Schema-pattern, Table-pattern,
+// and Table-Type
+// Returns: One row for each table; row has a number of attributes
+// such as TABLE_NAME, TABLE_CAT, TABLE_TYPE, ..
+// The value null indicates all Catalogs/Schemas. 
+// The value “” indicates current catalog/schema
+// The value “%” has the same meaning as SQL like clause
+// The last attribute is an array of types of tables to return. 
+// TABLE means only regular tables
+ResultSet rs = dbmd.getTables (“”, "", “%", new String[] {“TABLES”});
+while( rs.next()) {
+ System.out.println(rs.getString(“TABLE_NAME“));
+}
+```
 
 
 
