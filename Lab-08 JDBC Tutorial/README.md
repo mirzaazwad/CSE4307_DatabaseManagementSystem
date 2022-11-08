@@ -136,4 +136,19 @@ A step by step introduction:
 X' or 'Y' = 'Y
 ```
 * Then the resulting statement becomes:
+```java
+"select * from instructor where name = '" + "X' or 'Y' = 'Y" + "'"
+```
+which is basically
+```sql
+ select * from instructor where name = 'X' or 'Y' = 'Y'
+```
+* User could even update his/her salary
+```sql
+X'; update instructor set salary = salary + 10000 where name='Anne'; -
+```
+
+## SQLi Prevention mechanism using JDBC - Prepared Statements
+
+
  
