@@ -36,5 +36,45 @@
 * Embedded SQL provides a means by which a program can interact with a database server.
  * SQL statement can be translated at compile time into function calls
  * At runtime, these function calls connect to the database using an API that provides dynamic SQL facilities
+ 
+ ## Basic Structure of JDBC Code
+ 
+ ```java
+ public static void JDBCexample(String dbid, String userid, String passwd) 
+{ 
+ try (Connection conn = DriverManager.getConnection( 
+  "jdbc:oracle:thin:@db.yale.edu:2000:univdb", userid, passwd); 
+  Statement stmt = conn.createStatement();
+ ) 
+ { 
+ … Do Actual Work ….
+ }
+ catch (SQLException sqle) { 
+  System.out.println("SQLException : " + sqle);
+ }
+}
+ ```
+ 
+ Note: This structure works from JDK 7 and JDBC 14 onwards. Resources opened in “try (….)” syntax (“try with resources”) are 
+automatically closed at the end of the try block. The code given below works for older versions of java. Class.forName is not required from JDBC 4 onwards. The try with resources syntax given above is preferred for Java 7 onwards. 
+
+ 
+ ```java
+public static void JDBCexample(String dbid, String userid, String passwd) 
+{ 
+ try { 
+  Class.forName ("oracle.jdbc.driver.OracleDriver"); 
+  Connection conn = DriverManager.getConnection( 
+  "jdbc:oracle:thin:@db.yale.edu:2000:univdb", userid, passwd); 
+  Statement stmt = conn.createStatement(); 
+  … Do Actual Work ….
+  stmt.close();
+  conn.close();
+ }
+ catch (SQLException sqle) { 
+  System.out.println("SQLException : " + sqle);
+ }
+}
+```
 
 
