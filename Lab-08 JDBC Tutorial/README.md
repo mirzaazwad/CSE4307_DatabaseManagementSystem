@@ -76,5 +76,30 @@ public static void JDBCexample(String dbid, String userid, String passwd)
  }
 }
 ```
+## Database Queries using JDBC
 
+#### Update to the Database
 
+```java
+try {
+ stmt.executeUpdate(
+ "insert into instructor values('77987', 'Kim', 'Physics', 98000)");
+ } catch (SQLException sqle)
+{
+ System.out.println("Could not insert tuple. " + sqle);
+}
+```
+
+#### Execute Query and Fetch Print Results
+
+```java
+ResultSet rset = stmt.executeQuery(
+"select dept_name, avg (salary)
+from instructor
+group by dept_name");
+while (rset.next()) {
+System.out.println(rset.getString("dept_name") + " " +
+rset.getFloat(2));
+}
+
+```
