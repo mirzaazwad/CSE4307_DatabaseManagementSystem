@@ -147,8 +147,34 @@ which is basically
 ```sql
 X'; update instructor set salary = salary + 10000 where name='Anne'; -
 ```
+* So we understand that it isn't the best idea to create queries by concatenating strings in the following manner:
+```java
+"insert into instructor values(' " + ID + " ', ' " + name + " ', " + " ' + dept name + " ', " ' balance + ')"
+```
+Also in the above mentioned example of concatenating strings, what if the name was *D'Souza*?
+Always go for prepared statements as shown below for taking input from user that would be passed as a query to the database. _*ALWAYS USE PREPARED STATEMENTS WITH USER INPUT AS PARAMETERS*_.
 
-## SQLi Prevention mechanism using JDBC - Prepared Statements
+#### SQLi Prevention mechanism using JDBC - Prepared Statements
+
+The solution to the aforementioned SQL Injection Problem is the use of prepared statements
+```java
+PreparedStatement pStmt = conn.prepareStatement("insert into instructor values(?,?,?,?)"); // ? mark is a wildcard similar to its application in generics
+pStmt.setString(1, "88877");//set the first wildcard(?) to 88877
+pStmt.setString(2, "Perry"); //set the second wildcard(?) to Perry
+pStmt.setString(3, "Finance");//set the third wildcard(?) to Finance
+pStmt.setInt(4, 125000);//set the fourth wildcard(?) to 125000
+pStmt.executeUpdate();
+pStmt.setString(1, "88878");
+pStmt.executeUpdate(); // insert statements aren't executed before executeUpdate is called when it is called it inserts with the replaced values by setString
+```
+
+Prepared stament internally uses:
+```sql
+select * from instructor where name = 'X\' or \'Y\' = \'Y'
+```
+Which is essentially a sort of filtration or sanitisation
+
+
 
 
  
