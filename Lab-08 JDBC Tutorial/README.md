@@ -176,7 +176,7 @@ select * from instructor where name = 'X\' or \'Y\' = \'Y'
 Which is essentially a sort of filtration or sanitisation
 
 
-## Metadata
+## *Metadata*
 
 Metadata is essentially a set of data that describes and gives information about other data. 
 
@@ -192,7 +192,7 @@ for(int i = 1; i <= rsmd.getColumnCount(); i++) {
 }
 ```
 
-#### Database metadata
+#### *Database metadata*
 
 ```java
 DatabaseMetaData dbmd = conn.getMetaData();
