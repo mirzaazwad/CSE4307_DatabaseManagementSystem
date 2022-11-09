@@ -14,7 +14,7 @@ Essentially, it has no Name
 Anonymous blocks don't have a name and hence it cannot be called by any other block since it doesn't have a handle for reference. Instead, anonymous blocks serve as  containers that execute PL/SQL statements. It is not in the database and cannot be reused.(_one-time execution_).
 
 Let's do the mandatory thing to start out with any new programming language:
-```oracle
+```sql
 BEGIN
 DBMS_OUTPUT.PUT_LINE('Hello World!');
 END ;
@@ -30,7 +30,7 @@ It is stored in the database and can be reused.
 ## Conditional Statements
 
 **if then** is the most primitive of conditional statements. It can be written as: 
-```oracle
+```sql
 IF <condition-1> THEN
  --TRUE sequence of executable statements for condition-1
 ELSIF <condition-2> THEN
@@ -49,7 +49,7 @@ Modular code using a function has the following benefits:
 * More readable
 
 Structure of a Function:
-```oracle
+```sql
 FUNCTION [schema]name[( parameter[, parameter ...])]
 RETURN return_datatype
 IS
@@ -61,3 +61,78 @@ exception handler statements]
 
 END [name];
 ```
+Tid Bits about functions: 
+* **IN** parameter (like conventional parameter), **OUT** parameter(not used here, used for writing call back to the caller)
+* No datatype precision is allowed in parameter and return type:
+```sql
+ return varchar2(20); //is invalid
+```
+* Function Name and parameters should be self-explanatory. (Clean Code: do not use abc as function name, x, y, and z as paramters with excessive commenting for explanation purposes).
+* A simple example of a function:
+```sql
+CREATE OR REPLACE FUNCTION get_total_sales
+RETURN NUMBER
+IS 
+  v_total_sales:=0;
+BEGIN
+--get total sales
+ SELECT SUM(unit_price*quantity) INTO v_toal_sales FROM order_items INNER JOIN orders USING (order_id) WHERE status='Shipped';
+ -- return the total sales
+ RETURN v_total_sales;
+END;
+```
+
+#### Calling a function
+
+There are 3 general options:
+* It can readily tested by a fixed parameter from dual:
+```sql
+ select get_total('CSE') from dual;
+```
+* You can test it by passing it as a parameter in put_line function:
+```sql
+ DBMS_OUTPUT.PUT_LINE('Sales: ' || get_total_sales);
+```
+* It can be selected from table values, the parameter value can be passed dunamically in the select statement.
+```sql
+ select id, get_cgpa(sid) from students where dept='CSE';
+```
+## Built-in Functions
+
+#### DECODE function
+
+DECODE() compared expression to each search value one by one. If expression is equal to a search, then Oracle Database returns the corresponding result. If no match is found, then Oracle returns default. If default is omitted, then Oracle returns null.
+```sql
+DECODE(expr,search,result
+ [,search, result]...
+ [, default]
+ )
+```
+
+For example:
+```sql
+ SELECT product_id, DECODE(warehouse_id,1,'Southlake',
+                           2,'San Fransisco',
+                           3, 'New Jersey',
+                           4,'Seattle',
+                           'Non domestic')
+                            "Location of inventory" FROM inventories WHERE product_id<100;
+```
+
+#### Rank() function
+
+* The RANK() function is **analytical function** that calculates the rank of a value in a set of values.
+* The RANK() function returns the same rank for the rows with the same values. It adds the number of tied rows to the tied rank to calculate the next rank. Therefore, the ranks **may not be consecutive numbers**.
+* The Rank() function is useful for top-N and bottom-N queries
+
+Syntax of rank:
+```sql
+RANK()
+     OVER ([query_partition_clause] order_by_clause)
+```
+
+Example of rank:
+```sql
+select sid,name,cgpa, rank() over (order by cgpa desc) position from students;
+```
+
