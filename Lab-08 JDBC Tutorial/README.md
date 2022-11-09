@@ -176,11 +176,11 @@ select * from instructor where name = 'X\' or \'Y\' = \'Y'
 Which is essentially a sort of filtration or sanitisation
 
 
-## *Metadata*
+## Metadata
 
 Metadata is essentially a set of data that describes and gives information about other data. 
 
-#### ResultSet metadata
+#### **ResultSet metadata**
 In Java, we use ResultSetMetaData which is ResultSet for metadata.
 For instance, we execute a query to get the ResultSet rs, then to get metadata:
 
@@ -192,8 +192,9 @@ for(int i = 1; i <= rsmd.getColumnCount(); i++) {
 }
 ```
 
-#### *Database metadata*
+#### **Database metadata**
 
+###### **Get All the column names**
 ```java
 DatabaseMetaData dbmd = conn.getMetaData();
 // Arguments to getColumns: Catalog, Schema-pattern, Table-pattern,
@@ -210,6 +211,8 @@ while( rs.next()) {
 }
 ```
 and
+
+###### **Get All the table names**
 ```java
 DatabaseMetaData dbmd = conn.getMetaData();
 // Arguments to getTables: Catalog, Schema-pattern, Table-pattern,
@@ -224,6 +227,23 @@ DatabaseMetaData dbmd = conn.getMetaData();
 ResultSet rs = dbmd.getTables (“”, "", “%", new String[] {“TABLES”});
 while( rs.next()) {
  System.out.println(rs.getString(“TABLE_NAME“));
+}
+```
+
+## **Application of metadata - Finding Primary Key**
+
+```java
+DatabaseMetaData dmd = connection.getMetaData();
+// Arguments below are: Catalog, Schema, and Table
+// The value “” for Catalog/Schema indicates current catalog/schema
+// The value null indicates all catalogs/schemas
+ResultSet rs = dmd.getPrimaryKeys(“”, “”, tableName);
+while(rs.next()){
+// KEY_SEQ indicates the position of the attribute in 
+// the primary key, which is required if a primary key has multiple
+// attributes
+System.out.println(rs.getString(“KEY_SEQ”), 
+rs.getString("COLUMN_NAME");
 }
 ```
 
