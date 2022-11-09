@@ -271,7 +271,7 @@ conn.rollback();
 ```
 ## Handling Large Object Types
 
-* ```java getBlob()``` and ```java getClob()``` are similar to the getString() method but returns blob and clob respectively.
+* ``` getBlob()``` and ``` getClob()``` are similar to the ``` getString()``` method but returns blob and clob respectively.
 * get data from these objects using ```java getBytes()```
 * associate an open stream with Java Blob or Clob object to update large objects. 
 ```java
