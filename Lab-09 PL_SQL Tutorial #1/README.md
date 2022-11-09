@@ -65,7 +65,8 @@ Tid Bits about functions:
 * **IN** parameter (like conventional parameter), **OUT** parameter(not used here, used for writing call back to the caller)
 * No datatype precision is allowed in parameter and return type:
 ```sql
- return varchar2(20); //is invalid
+ return varchar2(20); 
+ --is invalid
 ```
 * Function Name and parameters should be self-explanatory. (Clean Code: do not use abc as function name, x, y, and z as paramters with excessive commenting for explanation purposes).
 * A simple example of a function:
