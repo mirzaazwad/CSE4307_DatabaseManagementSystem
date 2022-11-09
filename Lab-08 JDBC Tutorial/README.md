@@ -119,6 +119,12 @@ if (rs.wasNull())
  Systems.out.println(“Got null value”);
 }
 ```
+#### Call some functions or procedures
+
+```java
+CallableStatement cStmt1 = conn.prepareCall("{? = call some function(?)}");
+CallableStatement cStmt2 = conn.prepareCall("{call some procedure(?,?)}");
+```
 
 ## SQL Injection and its Prevention using Prepared Statements
 
@@ -230,7 +236,7 @@ while( rs.next()) {
 }
 ```
 
-## **Application of metadata - Finding Primary Key**
+#### **Application of metadata - Finding Primary Key**
 
 ```java
 DatabaseMetaData dmd = connection.getMetaData();
@@ -246,8 +252,33 @@ System.out.println(rs.getString(“KEY_SEQ”),
 rs.getString("COLUMN_NAME");
 }
 ```
+## Transaction Control in JDBC
 
+The default system is to commit SQL statements automatically where each SQL statement is viewed as a seperate transaction. BUT, this is a bad idea for transactions with multiple updates. The solution:
 
+Can turn off automatic commits on a connection:
+```java
+conn.setAutoCommit(false); //setting it to true can turn on automatic commit if needed
+```
+Transactions can and must then be:
+Commited Using:
+```java
+ conn.commit();
+```
+Rollback can also be performed for the immediate last commit using:
+```java
+conn.rollback();
+```
+## Handling Large Object Types
+
+* ```java getBlob()``` and ```java getClob()``` are similar to the getString() method but returns blob and clob respectively.
+* get data from these objects using ```java getBytes()```
+* associate an open stream with Java Blob or Clob object to update large objects. 
+```java
+blob.setBlob(int parameterIndex, InputStream inputStream)
+```
+
+[For More Information regarding JDBC, Click Here](https://docs.oracle.com/javase/tutorial/jdbc/index.html)
 
 
  
