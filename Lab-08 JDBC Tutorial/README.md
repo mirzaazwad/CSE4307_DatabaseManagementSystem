@@ -243,7 +243,7 @@ DatabaseMetaData dmd = connection.getMetaData();
 // Arguments below are: Catalog, Schema, and Table
 // The value “” for Catalog/Schema indicates current catalog/schema
 // The value null indicates all catalogs/schemas
-ResultSet rs = dmd.getPrimaryKeys(“”, “”, tableName);
+ResultSet rs = dmd.getPrimaryKeys("", "", tableName);
 while(rs.next()){
 // KEY_SEQ indicates the position of the attribute in 
 // the primary key, which is required if a primary key has multiple
