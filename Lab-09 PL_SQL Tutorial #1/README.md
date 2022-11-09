@@ -180,4 +180,4 @@ It works exactly in the same way as row-level trigger except it is only executed
 Syntax: Just ommit the **for each row** option.
 
 
-
+[For More Information Regarding PL/SQL](https://github.com/mirzaazwad/CSE4307_DatabaseManagementSystem/blob/main/Lab-10%20PL_SQL%20Tutorial%20%232/Notes%20on%20PLSQL.pdf) Courtesy of Bhaktiyar Hasan Sir, Zannatul Naim Sristy Ma'am and Anaas Jawad Sir.
