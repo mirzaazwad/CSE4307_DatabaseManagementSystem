@@ -17,7 +17,7 @@ Let's do the mandatory thing to start out with any new programming language:
 ```sql
 BEGIN
 DBMS_OUTPUT.PUT_LINE('Hello World!');
-END;
+END ;
 ```
 
 #### Named Blocks
@@ -27,3 +27,13 @@ While anonymous PL/SQL blocks are indispensable, the majority of code you write 
 * Procedures
 It is stored in the database and can be reused.
 
+## Conditional Statements
+
+**if then** is the most primitive of conditional statements. It can be written as: 
+```sql
+IF <condition> THEN
+ --TRUE sequence of executable statements
+ELSE
+  --FALSE/NULL sequence of executable statements
+END IF ;
+```
