@@ -230,7 +230,7 @@ DatabaseMetaData dbmd = conn.getMetaData();
 // The value “%” has the same meaning as SQL like clause
 // The last attribute is an array of types of tables to return. 
 // TABLE means only regular tables
-ResultSet rs = dbmd.getTables (“”, "", “%", new String[] {“TABLES”});
+ResultSet rs = dbmd.getTables ("", "", "%", new String[] {"TABLES"});
 while( rs.next()) {
  System.out.println(rs.getString(“TABLE_NAME“));
 }
