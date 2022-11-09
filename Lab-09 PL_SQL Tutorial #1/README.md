@@ -14,7 +14,7 @@ Essentially, it has no Name
 Anonymous blocks don't have a name and hence it cannot be called by any other block since it doesn't have a handle for reference. Instead, anonymous blocks serve as  containers that execute PL/SQL statements. It is not in the database and cannot be reused.(_one-time execution_).
 
 Let's do the mandatory thing to start out with any new programming language:
-```sql
+```oracle
 BEGIN
 DBMS_OUTPUT.PUT_LINE('Hello World!');
 END ;
@@ -30,10 +30,34 @@ It is stored in the database and can be reused.
 ## Conditional Statements
 
 **if then** is the most primitive of conditional statements. It can be written as: 
-```sql
-IF <condition> THEN
- --TRUE sequence of executable statements
+```oracle
+IF <condition-1> THEN
+ --TRUE sequence of executable statements for condition-1
+ELSIF <condition-2> THEN
+ --TRUE sequence of executable statements for condition-2
 ELSE
   --FALSE/NULL sequence of executable statements
 END IF ;
+```
+
+## Function
+
+#### Why use function/procedure?
+Modular code using a function has the following benefits:
+* More reusable
+* More manageable
+* More readable
+
+Structure of a Function:
+```oracle
+FUNCTION [schema]name[( parameter[, parameter ...])]
+RETURN return_datatype
+IS
+[declaration statements]
+BEGIN
+<executable statements with a return>
+[EXCEPTION
+exception handler statements]
+
+END [name];
 ```
