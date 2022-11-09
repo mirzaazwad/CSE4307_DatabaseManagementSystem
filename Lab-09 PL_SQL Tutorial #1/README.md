@@ -116,10 +116,11 @@ For example:
                            3, 'New Jersey',
                            4,'Seattle',
                            'Non domestic')
-                            "Location of inventory" FROM inventories WHERE product_id<100;
+                            "Location of inventory" 
+                            FROM inventories WHERE product_id<100;
 ```
 
-#### Rank() function
+#### Rank function
 
 * The RANK() function is **analytical function** that calculates the rank of a value in a set of values.
 * The RANK() function returns the same rank for the rows with the same values. It adds the number of tied rows to the tied rank to calculate the next rank. Therefore, the ranks **may not be consecutive numbers**.
@@ -135,4 +136,48 @@ Example of rank:
 ```sql
 select sid,name,cgpa, rank() over (order by cgpa desc) position from students;
 ```
+## Triggers
+
+A trigger is a statement that is executed automatically by the system as a side effer of a modification to the database.
+
+* To design a trigger mechanism, we must:
+ * Specify the **conditions** under which the trigger is to be executed.
+ * Specify the **actions** to be taken when the trigger executes.
+* Since the trigger is **event-oriented**, it is **not explicitly called** like functions rather it **automatically fies** whenever the **condition is met**.
+
+#### Classifying Triggers
+
+![Trigger Classification Image](https://github.com/mirzaazwad/CSE4307_DatabaseManagementSystem/blob/main/Lab-09%20PL_SQL%20Tutorial%20%231/Trigger.png)
+
+#### Row-level trigger
+
+Some example cases where it may be used,
+* Whenever an account holder withdraws money, his balance must be greater than the withdrawn amount.
+* Any student is admitted with basic information, his/her student ID will be generated automatically.
+* Whenever any update(1 or more rows affected) occurs in a specific table, the time of update should be recorded without human intervention.
+
+So they have one in common: **it is executed for each possible record's change**.
+
+Syntax for row-level trigger:
+```
+CREATE OR REPLACE TRIGGER trigger_name
+BEFORE | AFTER 
+INSER OR DELETE OR UPDATE OF column1, column2,
+ON table.name
+FOR EACH ROW
+REFERENCING OLD AS old.name
+NEW AS new.name
+WHEN <condition>
+DECLARE
+BEGIN
+EXCEPTION
+END ;
+```
+
+#### Statement-Level Trigger
+
+It works exactly in the same way as row-level trigger except it is only executed once no matter how many records are effected by the DML statement.
+Syntax: Just ommit the **for each row** option.
+
+
 
