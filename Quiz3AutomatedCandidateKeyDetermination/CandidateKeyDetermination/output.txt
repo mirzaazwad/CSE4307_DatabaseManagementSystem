@@ -1,2 +1,2 @@
-There are a total of 1 possible CKs. They are given below:
+There is only 1 possible CK. They are given below:
 CK1: D
