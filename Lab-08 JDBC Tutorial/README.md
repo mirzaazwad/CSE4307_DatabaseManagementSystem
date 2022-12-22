@@ -230,7 +230,7 @@ DatabaseMetaData dbmd = conn.getMetaData();
 // The value “%” has the same meaning as SQL like clause
 // The last attribute is an array of types of tables to return. 
 // TABLE means only regular tables
-ResultSet rs = dbmd.getTables (“”, "", “%", new String[] {“TABLES”});
+ResultSet rs = dbmd.getTables ("", "", "%", new String[] {"TABLES"});
 while( rs.next()) {
  System.out.println(rs.getString(“TABLE_NAME“));
 }
@@ -243,7 +243,7 @@ DatabaseMetaData dmd = connection.getMetaData();
 // Arguments below are: Catalog, Schema, and Table
 // The value “” for Catalog/Schema indicates current catalog/schema
 // The value null indicates all catalogs/schemas
-ResultSet rs = dmd.getPrimaryKeys(“”, “”, tableName);
+ResultSet rs = dmd.getPrimaryKeys("", "", tableName);
 while(rs.next()){
 // KEY_SEQ indicates the position of the attribute in 
 // the primary key, which is required if a primary key has multiple
