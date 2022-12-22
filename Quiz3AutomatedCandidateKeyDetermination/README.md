@@ -13,10 +13,11 @@ lecture for details of Method 3**.
 - The input should be in text file such as input.txt. The file should have entries as follows
 (as an example): (all entries are in UPPER CASE letter)
 **sample input.txt**
-
+```
 R(A,B,C,D)
-A->B, B->C, D->A
 
+A->B, B->C, D->A
+```
 It implies that line no. 1 contains the Relation where attributes are enclosed withing
 ( , , ) and each attribute is separated by a comma ,
 FDs are given in line no.2, each FD is separated by a comma ,
@@ -27,7 +28,7 @@ the arrow symbol is denoted by ->
 entry for output.txt is given bellow :
 
 **sample output.txt**
-
+```
 There are a total of 3 possible CKs. They are given below:
 
 CK1: AB
@@ -35,9 +36,9 @@ CK1: AB
 CK2: BD
 
 CK3: CD
-
+```
 - The program should be able to run correctly in each new settings of **input.txt**
-- 
+
 Note: Assignment should be submitted
 
 to a single .zip file where both sources and text
