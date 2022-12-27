@@ -14,7 +14,7 @@ public class CandidateKeyTest {
         if(!attributeClosureInput.getAttributeClosure().equals(AttributeClosure.AllAttributeSuperKey(this.attributes))){
             return false;
         }
-        List<String> subStrings=SubstringGenerator.getAllSubsequences(input);
+        List<String> subStrings= SubsequenceGenerator.getAllSubsequences(input);
         for(String s:subStrings)
         {
             AttributeClosure attributeClosureS=new AttributeClosure(s);
@@ -33,7 +33,7 @@ public class CandidateKeyTest {
             return input;
         }
         else{
-            List<String>subStrings=SubstringGenerator.getAllSubsequences(input);
+            List<String>subStrings= SubsequenceGenerator.getAllSubsequences(input);
             for(String s:subStrings)
             {
                 if(isCandidateKey(s))
