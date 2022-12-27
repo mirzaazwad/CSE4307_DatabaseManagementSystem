@@ -1,6 +1,5 @@
 package CandidateKeyDetermination;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -15,7 +14,7 @@ public class CandidateKeyTest {
         if(!attributeClosureInput.getAttributeClosure().equals(AttributeClosure.AllAttributeSuperKey(this.attributes))){
             return false;
         }
-        List<String> subStrings=SubstringGenerator.getAllSubStrings(input);
+        List<String> subStrings=SubstringGenerator.getAllSubsequences(input);
         for(String s:subStrings)
         {
             AttributeClosure attributeClosureS=new AttributeClosure(s);
@@ -34,7 +33,7 @@ public class CandidateKeyTest {
             return input;
         }
         else{
-            List<String>subStrings=SubstringGenerator.getAllSubStrings(input);
+            List<String>subStrings=SubstringGenerator.getAllSubsequences(input);
             for(String s:subStrings)
             {
                 if(isCandidateKey(s))

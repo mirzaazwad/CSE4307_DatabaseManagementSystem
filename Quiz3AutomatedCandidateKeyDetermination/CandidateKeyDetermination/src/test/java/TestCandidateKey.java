@@ -100,4 +100,27 @@ public class TestCandidateKey {
                 "CK4: CD\n",fileContents);
     }
 
+    @Test
+    public void Test_Case_5() throws IOException{
+        CandidateKey candidateKey=new CandidateKey("TestCases/input5.txt");
+        candidateKey.outputCandidateKeys("TestCases/output5.txt");
+        FileReader fileReader=new FileReader("TestCases/output5.txt");
+        Character character;
+        String fileContents="";
+        character=(char)fileReader.read();
+        while(true){
+            fileContents+=character;
+            int temp=fileReader.read();
+            if(temp==-1){
+                break;
+            }
+            else{
+                character=(char)temp;
+            }
+        }
+        System.out.println(fileContents);
+        assertEquals("There is only 1 possible CK. They are given below:\n" +
+                "CK1: AC\n",fileContents);
+    }
+
 }

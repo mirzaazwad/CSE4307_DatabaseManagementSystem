@@ -51,4 +51,14 @@ public class TestCandidateKeyFinder {
         }
     }
 
+    @Test
+    public void testSubsequenceGenerator(){
+        List<String>subsequences=new ArrayList<String>();
+        subsequences=SubstringGenerator.printSubsequence("ABCD","",subsequences);
+        for(String s:subsequences)
+        {
+            System.out.println(s);
+        }
+    }
+
 }

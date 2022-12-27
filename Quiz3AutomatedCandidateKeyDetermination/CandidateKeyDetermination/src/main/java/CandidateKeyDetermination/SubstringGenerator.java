@@ -4,26 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SubstringGenerator {
-    public static List<String>getAllSubStrings(String input)
+    public static List<String> getAllSubsequences(String input)
     {
         List<String>answer=new ArrayList<String>();
-        answer=SubstringGenerator.getAllSubStrings(input,0,0,answer);
+        answer=printSubsequence(input,"",answer);
         return answer;
     }
 
-    private static List<String> getAllSubStrings(String input, int start, int end, List<String>answer)
+    public static List<String> printSubsequence(String input, String output,List<String>subsequences)
     {
-        if (end == input.length())
-            return answer;
-        else if (start > end)
-            getAllSubStrings(input, 0, end + 1,answer);
-        else {
-            String result="";
-            for (int i = start; i <= end; i++)
-                result=result+String.valueOf(input.charAt(i));
-            answer.add(result);
-            getAllSubStrings(input, start + 1, end,answer);
+        // Base Case
+        // if the input is empty print the output string
+        if (input.isEmpty()) {
+            subsequences.add(output);
+            return subsequences;
         }
-        return answer;
+
+        // output is passed with including
+        // the Ist character of
+        // Input string
+        printSubsequence(input.substring(1), output + String.valueOf(input.charAt(0)),subsequences);
+
+        // output is passed without
+        // including the Ist character
+        // of Input string
+        return printSubsequence(input.substring(1), output,subsequences);
     }
 }

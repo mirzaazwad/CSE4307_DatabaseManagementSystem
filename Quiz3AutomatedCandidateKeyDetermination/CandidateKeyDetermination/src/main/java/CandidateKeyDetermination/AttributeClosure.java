@@ -23,7 +23,7 @@ public class AttributeClosure {
     }
 
     private String findAttributeClosure(String input,String currentResult){
-        List<String>allSubStrings=SubstringGenerator.getAllSubStrings(input);
+        List<String>allSubStrings=SubstringGenerator.getAllSubsequences(input);
         SortedSet<Character> sortedSet=transitivityProperty(input);
         sortedSet=findAllCompoundDependencies(allSubStrings,sortedSet);
         String result=AttributeClosure.getUniqueElementsAsString(sortedSet);
